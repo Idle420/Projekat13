@@ -13,8 +13,8 @@ import {createOrUpdateUser} from "../../functions/auth";
 
 
 const Login = ({history}) => {
-        const [email,setEmail] = useState("")
-        const[password, setPassword] = useState("");
+        const [email,setEmail] = useState("lukamijatovic99@gmail.com")
+        const[password, setPassword] = useState("12345678");
         const[loading, setLoading] = useState(false);
 
         const {user} = useSelector((state) => ({...state}));

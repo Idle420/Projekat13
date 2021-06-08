@@ -1,13 +1,53 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import "./site.css";
+import ProductCard from "../components/cards/ProductCard"
+import {getProductsByCount} from "../functions/product"
+import Jumbotron from '../components/cards/Jumbotron'
+import LoadingCard from "../components/cards/LoadingCard"
 
+const Home = () => {
 
-const Home = () => (
-    <div className="home" >
-      <p className="p">React Home</p>
-    
+  const [products, setProducts] = useState([])
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    loadAllProducts()
+  }, [])
+
+  const loadAllProducts = () => {
+    setLoading(true)
+    getProductsByCount(3)
+    .then((res) => {
+      setProducts(res.data)
+      setLoading(false)
+    })
+  }
+  return(
+    <>
+    <div className="jumbotron text-primary h1 font-weight-bold text-center" >
+      <Jumbotron
+      text = {["Latest product", "New arrivals", "Best sellers"]}
+      />
     </div>
+    <div className = "container"> 
+      {loading ? (
+      <LoadingCard count={3} />
+      ) : (
+      <div className = "row"> 
+        {products.map((product) => (
+          <div 
+            key={product._id} 
+            className="col-md-4"
+          >
+            <ProductCard product = {product}/>
+          </div> 
+        ))}
+      </div>
+      )}
+    </div>
+    </>
   );
+}
 
 
 export default Home;

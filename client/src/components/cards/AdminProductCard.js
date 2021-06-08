@@ -1,6 +1,6 @@
 import React from 'react';
 import {Card} from 'antd';
-import Torta from "../../images/Torta.JPG";
+import download from "../../images/download.jpg";
 import {EditOutlined, DeleteOutlined} from "@ant-design/icons";
 import {Link} from 'react-router-dom';
 
@@ -13,7 +13,7 @@ const AdminProductCard = ({product, handleRemove}) => {
     return (
         <Card 
             cover={
-                <img src={images && images.length ? images[0].url : Torta} 
+                <img src={images && images.length ? images[0].url : download} 
                 style={{height: "150px", objectFit:"cover"}
                 }
                 className="p-1"

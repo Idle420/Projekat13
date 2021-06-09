@@ -17,6 +17,14 @@ export const removeProduct = async (slug, authtoken) =>
     },
 });
 
+export const getProducts = async (sort, order, limit) => 
+    await axios.post( `${process.env.REACT_APP_API}/products`, {
+        sort, 
+        order, 
+        limit
+    }
+);
+
 export const getProduct = async (slug) => 
     await axios.get( `${process.env.REACT_APP_API}/product/${slug}`);
 

@@ -60,23 +60,25 @@ exports.update = async (req, res) => {
         }
 };
 //WITH PAGINATION
-exports.list = async (req,res) => {
-    try {
-        const {sort, order, page} = req.body
+exports.list = async (req, res) => {
+    try{
+        //createdAt/updatedAt, desc,asc, 3
+        const {sort, order, page} = req.body;
         const currentPage = page || 1
         const perPage = 3
 
-        const product = await Product.find({})
+        const products = await Product.find({})
         .skip((currentPage - 1) * perPage)
         .populate('category')
         .populate('subs')
         .sort([[sort, order]])
         .limit(perPage)
-        .exec()
+        .exec();
 
-        res.json(product)
-    } catch (err) {
-        console.log(err)
+        res.json(products);
+    }
+    catch(err){
+        console.log(err);
     }
 };
 

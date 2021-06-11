@@ -25,6 +25,9 @@ export const getProducts = async (sort, order, limit) =>
     }
 );
 
+export const getProductsCount = async () => 
+    await axios.get(`${process.env.REACT_APP_API}/products/total`);
+
 export const getProduct = async (slug) => 
     await axios.get( `${process.env.REACT_APP_API}/product/${slug}`);
 

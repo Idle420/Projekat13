@@ -18,6 +18,8 @@
     "react-image-file-resizer": "^0.4.4",
     "react-images-upload-remove": "^1.1.2",
     "react-redux": "^7.2.2",
+    "react-responsive": "^8.2.0",
+    "react-responsive-carousel": "^3.2.18",
     "react-router-dom": "^5.2.0",
     "react-script": "^2.0.5",
     "react-scripts": "^4.0.3",

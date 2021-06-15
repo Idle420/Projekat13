@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {getProduct} from '../functions/product'
 import SingleProduct from '../components/cards/SingleProduct'
+import { Tabs } from 'antd'
 
 
  const Product = ({match}) => {
@@ -19,9 +20,15 @@ import SingleProduct from '../components/cards/SingleProduct'
          <div className="row pt-4">
              <SingleProduct product={product} />
          </div>
-
-         <div className="row">
-             <div>Related products</div>
+        <br/>
+        <br/>
+        <br/>
+         <div className="row p-5">
+             <div className="col text-center pt-5 pb-5">
+                 <hr/>
+                <h4> Related products </h4>
+                <hr/>
+            </div>
          </div>
      </div>
  }

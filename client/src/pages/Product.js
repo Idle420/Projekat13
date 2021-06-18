@@ -1,12 +1,17 @@
 import React, {useEffect, useState} from 'react'
-import {getProduct} from '../functions/product'
+import {getProduct, productStar} from '../functions/product'
 import SingleProduct from '../components/cards/SingleProduct'
 import { Tabs } from 'antd'
+import {useSelector} from 'react-redux'
+
 
 
  const Product = ({match}) => {
-     const [product, setProduct] = useState({})
-     const {slug} = match.params
+    const [product, setProduct] = useState({})
+    const {slug} = match.params
+    const [star, setStar] = useState(0)
+    const {user} = useSelector((state) => ({...state}))
+
 
      useEffect(() => {
         loadSingleProduct()
@@ -16,9 +21,23 @@ import { Tabs } from 'antd'
          getProduct(slug).then((res) => setProduct(res.data))
      }
 
+     const onStarClick = (newRating, name) => {
+         setStar(newRating)
+        //  console.table(newRating, name)
+        productStar(name, star, user.token)
+        .then((res) => {
+            console.log("rating clicked", res.data)
+            loadSingleProduct()
+        })
+     }
+
      return <div className="container-fluid">
          <div className="row pt-4">
-             <SingleProduct product={product} />
+             <SingleProduct 
+             product={product}
+             onStarClick={onStarClick}
+             star={star}
+              />
          </div>
         <br/>
         <br/>

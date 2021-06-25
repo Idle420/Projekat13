@@ -28,7 +28,7 @@ const ProductListItems = ({product}) => {
                     Sub categories
                     {subs.map((s) => (
                        <Link
-                        to={`/sub/${slug}`}
+                        to={`/sub/${s.slug}`}
                         key={s._id}
                         className="label label-default label-pill pull-xs-right"
                        >

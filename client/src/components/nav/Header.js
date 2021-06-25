@@ -6,6 +6,7 @@ import firebase from "firebase";
 import {useDispatch, useSelector} from "react-redux";
 import{useHistory} from "react-router-dom";
 import "./header.css"
+import Search from '../forms/Search'
 
 const { SubMenu, Item } = Menu;
 
@@ -33,7 +34,7 @@ const Header = () => {
   
 return (
   
-    <Menu  className="menu menu-dark bg-secondary" onClick={handleClick} theme="dark" mode="horizontal">
+    <Menu  className="menu menu-dark bg-white" onClick={handleClick} theme="light" mode="horizontal">
       <Item key="home" icon={<AppstoreOutlined />}>
        <Link to="/">Home</Link>
       </Item>
@@ -74,6 +75,8 @@ return (
        
       </SubMenu>
       }
+
+      <span className="float-right p-1"><Search/></span>
     </Menu>
     
     );

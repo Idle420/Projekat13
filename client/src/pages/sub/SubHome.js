@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { getCategories, getCategory } from "../../functions/category";
-import { Link } from "react-router-dom";
+import { getCategories, getSub } from "../../functions/sub";
 import ProductCard from "../../components/cards/ProductCard";
 
-const CategoryHome = ({match}) => {
+const SubHome = ({match}) => {
 
-    const [category, setCategory] = useState({})
+    const [sub, setSub] = useState({})
     const [products, setProducts] = useState([])
     const [loading, setLoading] = useState(false);
 
@@ -13,10 +12,10 @@ const CategoryHome = ({match}) => {
 
     useEffect(() => {
         setLoading(true);
-        getCategory(slug)
+        getSub(slug)
             .then((res) => {
                 console.log(JSON.stringify(res.data, null, 4));
-                setCategory(res.data.category);
+                setSub(res.data.sub);
                 setProducts(res.data.products);
                 setLoading(false);
             })
@@ -32,20 +31,21 @@ const CategoryHome = ({match}) => {
                         </h4>
                     ) : (
                         <h4 className="text-center p-3 mt-5 mb-5 display-4 jumbotron">  
-                            {products.length} Products in "{category.name}" category
+                            {products.length} Products in "{sub.name}" sub category
                         </h4>
                     )}
                 </div>
             </div>
+
             <div className="row">
                 {products.map((p) => (
-                    <div className='col-md-4' key={p._id}>
-                    <ProductCard product={p}/>
+                    <div className="col" key={p._id}>
+                        <ProductCard product={p} /> 
                     </div>
-                    ))}
+                ))}
             </div>
         </div>
     ) 
 }
 
-export default CategoryHome;
+export default SubHome;

@@ -24,7 +24,7 @@ const CategoryList = () => {
     return (
         <div className="container">
             <div className="row">
-                {loading ? (<h4 classNAme="text-center">Loading...</h4>) : showCategories()}
+                {loading ? (<h4 className="text-center">Loading...</h4>) : showCategories()}
             </div>
         </div>
         )

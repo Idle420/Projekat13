@@ -23,6 +23,7 @@ import ProductCreate from "../src/pages/admin/product/ProductCreate";
 import ProductUpdate from "../src/pages/admin/product/ProductUpdate";
 import AllProducts from "../src/pages/admin/product/AllProducts";
 import Product from './pages/Product'
+import CategoryHome from './pages/category/CategoryHome'
 
 
 
@@ -73,6 +74,7 @@ const App = () =>  {
         <Route exact path="/register/complete" component={RegisterComplete}/>
         <Route exact path="/forgot/password" component={ForgotPassword}/>
         <Route exact path="/product/:slug" component={Product} />
+        <Route exact path="/category/:slug" component={CategoryHome} />
         <UserRoute exact path="/user/history" component={History}/>
         <UserRoute exact path="/user/password" component={Password}/>
         <UserRoute exact path="/user/wishlist" component={Wishlist}/>         

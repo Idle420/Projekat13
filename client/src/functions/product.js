@@ -10,6 +10,7 @@ export const createProduct = async (product, authtoken ) =>
 export const getProductsByCount = async (count) => 
     await axios.get(`${process.env.REACT_APP_API}/products/${count}`);
 
+
 export const removeProduct = async (slug, authtoken ) => 
     await axios.delete( `${process.env.REACT_APP_API}/product/${slug}`, {
         headers: {
@@ -47,5 +48,8 @@ export const productStar = async (productId, star, authtoken) =>
         },
     });
 
-    export const getRelated = async (productId) => 
+export const getRelated = async (productId) => 
     await axios.get(`${process.env.REACT_APP_API}/product/related/${productId}`);   
+
+export const fetchProductsByFilter = async (arg) => 
+    await axios.post(`${process.env.REACT_APP_API}/search/filters`, arg);

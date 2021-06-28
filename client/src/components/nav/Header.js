@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Menu} from "antd";
-import {  AppstoreOutlined, SettingOutlined, UserAddOutlined, UserOutlined, LogoutOutlined, } from '@ant-design/icons';
+import {  AppstoreOutlined, SettingOutlined, UserAddOutlined, UserOutlined, LogoutOutlined, ShopOutlined} from '@ant-design/icons';
 import {Link} from"react-router-dom";
 import firebase from "firebase";
 import {useDispatch, useSelector} from "react-redux";
@@ -37,6 +37,10 @@ return (
     <Menu  className="menu menu-dark bg-white" onClick={handleClick} theme="light" mode="horizontal">
       <Item key="home" icon={<AppstoreOutlined />}>
        <Link to="/">Home</Link>
+      </Item>
+
+      <Item key="shop" icon={<ShopOutlined />}>
+       <Link to="/shop">Shop</Link>
       </Item>
 
       {!user && (

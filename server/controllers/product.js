@@ -1,6 +1,7 @@
 const Product = require("../models/product");
 const User = require("../models/user");
 const slugify = require("slugify");
+const product = require("../models/product");
 
 exports.create = async (req, res) => {
   try {
@@ -194,9 +195,58 @@ const handlePrice = async (req, res, price) => {
     console.log(err)
   }
 }
+const handleCategory = async (req, res, category) => {
+  try{
+    let products = await Product.find({category}) 
+    .populate('category', '_id.name')
+    .populate('subs','_id.name' )
+    .populate('postedBy', '_id.name')
+    .exec();
+
+    res.json(products);
+  }catch(err){
+    console.log(err);
+  }
+}
+
+const handleStars = (req, res, stars) => {
+  Product.aggregate([
+    {
+      $project: {
+        document: "$$ROOT",
+        floorAverage: {
+          $floor: { $avg: "$ratings.star" }
+        }
+      }
+    },
+    { match: {floorAverage: stars}}
+  ])
+  .limit(12)
+  .exec((err, aggregates) => {
+    if(err) console.log("AGGRAGATE ERROR", err)
+    Product.find({_id:aggregates})
+    .populate('category', '_id.name')
+    .populate('subs','_id.name' )
+    .populate('postedBy', '_id.name')
+    .exec((err, products) => {
+      if(err) console.log("AGGRAGATE ERROR", err)
+      res.json(products)
+    })
+  })
+}
+
+const handleSub = async (req, res, sub) => {
+  const products = await Product.find({subs: sub})
+  .populate('category', '_id.name')
+    .populate('subs','_id.name' )
+    .populate('postedBy', '_id.name')
+    .exec()
+
+    res.json(products)
+}
 
 exports.searchFilters = async (req,res) => {
-  const {query, price} = req.body
+  const {query, price, category, stars, sub} = req.body
   if(price !== undefined) {
     console.log('price', price)
     await handlePrice(req, res, price)
@@ -205,5 +255,18 @@ exports.searchFilters = async (req,res) => {
     console.log('query', query)
     await handleQuery(req, res, query)
   }
+  
+  if(category){
+    console.log('category --->', category);
+    await handleCategory(req, res, category);
+  }
+  if(stars) {
+    console.log('stars --->', stars);
+    await handleStars(req, res, stars);
+  }
+  if(sub) {
+    console.log('sub --->', sub);
+    await handleSub(req, res, sub);
+  }
 }
-
+  
